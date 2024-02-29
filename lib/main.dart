@@ -1,43 +1,84 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const AppTabBar());
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-  // This widget is the root of your application.
+class AppTabBar extends StatelessWidget {
+  const AppTabBar({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // Application name
-      title: 'Flutter Hello World',
-      // Application theme data, you can set the colors for the application as
-      // you want
+      debugShowCheckedModeBanner: false,
+      title: "Ejemplo TabBar",
       theme: ThemeData(
-        // useMaterial3: true,
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.teal,
       ),
-      // A widget which will be started on application startup
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MiPaginaInicial(),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  final String title;
-  const MyHomePage({super.key, required this.title});  
+class MiPaginaInicial extends StatefulWidget {
+  const MiPaginaInicial({Key? key}) : super(key: key);
 
   @override
+  State<MiPaginaInicial> createState() => _MiPaginaInicialState();
+}
+
+class _MiPaginaInicialState extends State<MiPaginaInicial> {
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        // The title text which will be shown on the action bar
-        title: Text(title),
-      ),
-      body: Center(
-        child: Text(
-          'Hello, World!',
-        ),
-      ),
-    );
+    return DefaultTabController(
+        length: 4,
+        child: Scaffold(
+          appBar: AppBar(
+            title: const Text("TabBar Yizzia Monge"),
+            bottom: const TabBar(tabs: [
+              Tab(
+                text: "Horarios",
+                icon: Icon(Icons.access_time),
+              ),
+              Tab(
+                text: "Locales",
+                icon: Icon(Icons.add_location),
+              ),
+              Tab(
+                text: "Contacto",
+                icon: Icon(Icons.add_call),
+              ),
+              Tab(
+                text: "Comida",
+                icon: Icon(Icons.apple_rounded),
+              ),
+            ] //texto icono
+                ),
+          ),
+          body: const TabBarView(children: <Widget>[
+            Center(
+              child: Text(
+                "Alerta",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+            ),
+            Center(
+              child: Text(
+                "Opcion 2 ",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+            ),
+            Center(
+              child: Text(
+                "Opcion 3",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+            ),
+            Center(
+              child: Text(
+                "Opcion 4",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+            )
+          ]),
+        ));
   }
 }
